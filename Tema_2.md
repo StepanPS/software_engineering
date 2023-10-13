@@ -307,7 +307,7 @@ reversed_word = word[::-1]
 print(reversed_word == word)
 ```
 ### Результат.
-![Меню]( https://github.com/StepanPS/software_engineering/blob/Tema_2/pic/ind_10.png)
+![Меню](https://github.com/StepanPS/software_engineering/blob/Tema_2/pic/ind_10.png)
 
 ## Выводы
 
