@@ -286,7 +286,7 @@ Y = int(input('Введите У:'))
 print(X,'+', Y,'=', X+Y)
 ```
 ### Результат.
-![Меню]( https://github.com/StepanPS/software_engineering/blob/Tema_2/pic/ind_9.png)
+![Меню](https://github.com/StepanPS/software_engineering/blob/Tema_2/pic/int_9.png)
 
 ## Выводы
 
@@ -307,7 +307,7 @@ reversed_word = word[::-1]
 print(reversed_word == word)
 ```
 ### Результат.
-![Меню](https://github.com/StepanPS/software_engineering/blob/Tema_2/pic/ind_10.png)
+![Меню](https://github.com/StepanPS/software_engineering/blob/Tema_2/pic/int_10.png)
 
 ## Выводы
 
