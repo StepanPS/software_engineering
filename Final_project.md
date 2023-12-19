@@ -8,6 +8,10 @@
 
 ## Итоговый проект
 ### Telegram бот позволяющий конвертировать валюту.
+
+### Результат.
+![Меню](https://github.com/StepanPS/software_engineering/blob/Final_Project/pic/final_project.png)
+
 ```python
 import telebot
 from telebot import types
@@ -74,10 +78,6 @@ def my_currency(message):
 
 bot.polling(none_stop=True)
 ```
-### Результат.
-![Меню](https://github.com/StepanPS/software_engineering/blob/Final_Project/pic/final_project.png)
-
-
 ## Выводы
 1.	` import telebot`: Импортируем библиотеку telebot
 2.	` from telebot import types`: Импортируем из модуля telebot конкретный класс – types (кнопки)
