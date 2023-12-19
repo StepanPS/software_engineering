@@ -79,15 +79,38 @@ bot.polling(none_stop=True)
 
 
 ## Выводы
-Код выводит сообщения с найденными значениями. Каждая строчка кода получилась индивидуальной:
-1. `class CustomException(Exception): `: Создается класс CustomException наследующий от класса Exception
-2. `pass `: Пустой блок кода
-3. `try: `: 
-4. ` number = int(input("Введите число: "))`: Ввод числа с клавиатуры
-5. `if number % 2 != 0: `: С помощью оператора % проверяется, является ли число четным или нечетным.
-6. `raise CustomException("Введено нечетное число!") `: Если число нечетное, генерируется исключение CustomException с сообщением "Введено нечетное число!".
-7. `else: `: Иначе…
-8. `print("Введено четное число.") `: выводит сообщение
-9. ` except CustomException as e:`: Переменная “e” содержит информацию об ошибке
-10. ` print(e)`: Выводит переменную “e”
-11. ` `:  C 11 по 18 пункт комментарии индентичны
+1.	` import telebot`: Импортируем библиотеку telebot
+2.	` from telebot import types`: Импортируем из модуля telebot конкретный класс – types (кнопки)
+3.	` from currency_converter import CurrencyConverter`: Импортируем из модуля currency_converter конкретный класс – CurrencyConverter (конвертация)
+4.	` c = CurrencyConverter()`: Переменной присваиваем класс CurrencyConverter
+5.	` amount = 0`:
+6.	`bot = telebot.TeleBot('6811650230:AAEXhbUPDLgo4USKdm0EcEEYFxf0udAZtwU') `: создание экземпляра класса TeleBot с указанием токена бота, полученного при регистрации.
+
+7.	`@bot.message_handler(commands=['start']) `: вызывается декорированная функция и входящее сообщение передается в качестве аргумента.
+8.	`def start(message): `: функция с параметром 
+9.	`bot.send_message(message.chat.id, 'Доброго времени суток. Введите вашу сумму.') `: функция send_message позволяет боту отправить сообщение 
+10.	` bot.register_next_step_handler(message, summa)`: функция register_next_step_handler с двумя аргументами message и функцией summa
+
+11.	`def summa(message): `: функция с параметром 
+12.	` global amount`: объявление переменной amount как глобальной, чтобы ее значение можно было изменять внутри функции.
+13.	try:
+14.	` amount = int(message.text.strip())`: переменной присваивается значение – это сообщение от пользователя целочисленное число(функция int). Функция strip удаляет пробелы
+15.	except ValueError:
+16.	` bot.send_message(message.chat.id, 'Неверный формат.')`:
+17.	`if amount > 0: `: если переменная amount больше 0
+18.	`m = types.InlineKeyboardMarkup(row_width=1)`: создается объект m типа InlineKeyboardMarkup (встроенная клавиатура), который представляет собой элемент встроенной клавиатуры. Параметр
+19.	`  button1 = types.InlineKeyboardButton('RUB/USD', callback_data='rub/usd')`: объект одной кнопки, с параметром которая именуется RUB/USD, аргументом  callback_data – это строка с данными, отправляемые боту в ответном запросе при нажатии кнопки
+20.	` button3 = types.InlineKeyboardButton('Пользовательские значения', callback_data='else')`:
+21.	` m.add(button1, button2, button3)`: добавление на клавиатуру наших кнопок
+22.	`bot.send_message(message.chat.id, 'Выберите пару валют ', reply_markup=m) `: reply_markup параметр функции send_message выводит сообщение и клавиатуру
+23.	else:
+24.	` bot.send_message(message.chat.id, 'Сумма должна быть больше 0.')`:
+25.	`bot.register_next_step_handler(message, summa) `:
+
+26.	`@bot.callback_query_handler(func=lambda call: True) `: вызывается декорированная функция callback_query_handler (позволяет обрабатывать пользовательские действия, связанные с нажатием кнопок клавиатуры) с параметром func=lambda call: True(функция lambda которая всегда True, всегда реагирует на нажатие кнопок)
+27.	`def callback(call): `: функция при нажатии на кнопку, параметр
+28.	` if call.data != 'else':`: Условие, которое проверяет, что поле data запроса не равно 'else'.
+29.	` values = call.data.upper().split('/')`: Значение поля data из запроса преобразуется в верхний регистр(функции upper) и затем разбивается по разделителю '/'.
+30.	`res = c.convert(amount, values[0], values[1]) `: объект c, функция convert, кол-во amount, первый, второй элемент
+31.	` bot.polling(none_stop=True)`: Позволяет продолжать боту работать, даже если возникнут ошибки
+
